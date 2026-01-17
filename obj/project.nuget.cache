@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "aaGNVHWcUso=",
+  "success": true,
+  "projectFilePath": "/home/shivam-vee/Projects/C#/blzrTest/blzrTest.csproj",
+  "expectedPackageFiles": [
+    "/home/shivam-vee/.nuget/packages/microsoft.aspnetcore.app.internal.assets/10.0.0/microsoft.aspnetcore.app.internal.assets.10.0.0.nupkg.sha512",
+    "/home/shivam-vee/.nuget/packages/mudblazor/8.15.0/mudblazor.8.15.0.nupkg.sha512"
+  ],
+  "logs": []
+}

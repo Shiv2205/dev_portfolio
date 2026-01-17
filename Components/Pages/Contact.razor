@@ -1,0 +1,13 @@
+@page "/contact"
+
+<PageTitle>Contact Me</PageTitle>
+
+<MudContainer>
+    <MudText Typo="Typo.h3" GutterBottom="true">Contact Me</MudText>
+    <MudForm>
+        <MudTextField T="string" Label="Name" Required="true" />
+        <MudTextField T="string" Label="Email" Required="true" InputType="InputType.Email" />
+        <MudTextField T="string" Label="Message" Required="true" Lines="5" />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4">Submit</MudButton>
+    </MudForm>
+</MudContainer>

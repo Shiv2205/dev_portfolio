@@ -1,0 +1,21 @@
+﻿@page "/"
+@* @rendermode InteractiveServer *@
+
+<PageTitle>Home</PageTitle>
+
+<MudContainer>
+    <MudText Typo="Typo.h3" GutterBottom="true">@greeting</MudText>
+    <MudText Typo="Typo.h5" GutterBottom="true">I'm a passionate developer who loves building beautiful and functional web applications.</MudText>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="projects" Class="mr-2">View My Work</MudButton>
+    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="ChangeGreeting">Change Greeting</MudButton>
+</MudContainer>
+
+@code {
+    private string greeting = "Welcome to My Portfolio";
+
+    private void ChangeGreeting()
+    {
+        greeting = "You clicked the button!";
+        StateHasChanged();
+    }
+}
