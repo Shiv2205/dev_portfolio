@@ -1,0 +1,84 @@
+# Visual Studio
+.vs/
+*.sln.opt
+*.suo
+*.user
+*.userprefs
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+bin/
+obj/
+*.log
+*.bak
+*.ncb
+*.opendb
+*.sdf
+*.cache
+*.aps
+*.bsc
+*.lib
+*.sbr
+*.res
+*.pch
+*.pdb
+*.pgp
+*.idb
+*.opt
+*.stackdump
+*.tlb
+*.tlh
+*.tmp
+*.vspscc
+*.vssscc
+*.vsp
+*.vsw
+*.code-workspace
+
+# NuGet
+.nuget/
+*.nuget.props
+*.nuget.targets
+packages/
+
+# Rider
+.idea/
+
+# Dotnet tool local tools
+.config/dotnet-tools.json
+
+# Test Results
+TestResults/
+*.trx
+
+# Publish files
+publish/
+*/[Pp]ublish/
+
+# Logs
+logs/
+
+# Azure Functions
+local.settings.json
+
+# Environment variables
+.env
+.env.*
+
+# Miscellaneous
+Thumbs.db
+.DS_Store
+
+# Blazor specific
+wwwroot/lib/
+wwwroot/css/app.css
+wwwroot/css/bootstrap/
+**/*.blat
+**/*.scss
+**/*.sass
+
+# User secrets
+appsettings.Development.json
+appsettings.json
+Properties/launchSettings.json
