@@ -9,14 +9,16 @@
         <MudItem xs="12" sm="4">
             <MudCard>
                 <MudCardContent>
-                    <MudAvatar Image="@profile.AvatarUrl" Style="height:200px; width:200px; margin-bottom: 20px;" />
+                    <MudAvatar Style="height:200px; width:200px; margin-bottom: 20px;">
+                        <MudImage Src="@profile.AvatarUrl"/> 
+                    </MudAvatar>
                     <MudText Typo="Typo.h5">@profile.Name</MudText>
                     <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@profile.Title</MudText>
                 </MudCardContent>
                 <MudCardActions>
                     @foreach (var social in profile.SocialLinks)
                     {
-                        <MudButton Link="@social.Value" Target="_blank" Variant="Variant.Text" Color="Color.Primary">@social.Key</MudButton>
+                        <MudButton Href="@social.Value" Target="_blank" Variant="Variant.Text" Color="Color.Primary">@social.Key</MudButton>
                     }
                 </MudCardActions>
             </MudCard>
