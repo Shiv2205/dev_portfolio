@@ -1,21 +1,59 @@
 ﻿@page "/"
-@* @rendermode InteractiveServer *@
+@using blzrTest.Components.Data
+@inject ProjectService projectService
+@inject DeveloperProfile developerProfile
 
 <PageTitle>Home</PageTitle>
 
 <MudContainer>
-    <MudText Typo="Typo.h3" GutterBottom="true">@greeting</MudText>
-    <MudText Typo="Typo.h5" GutterBottom="true">I'm a passionate developer who loves building beautiful and functional web applications.</MudText>
-    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="projects" Class="mr-2">View My Work</MudButton>
-    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="ChangeGreeting">Change Greeting</MudButton>
+    <MudGrid Justify="Justify.Center" Class="mt-8">
+        <MudItem xs="12" sm="10" md="8">
+            <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Welcome to My Portfolio</MudText>
+            <MudText Typo="Typo.h5" Align="Align.Center" GutterBottom="true">I'm a passionate developer who loves building beautiful and functional web applications.</MudText>
+        </MudItem>
+    </MudGrid>
+
+    <MudDivider Class="my-8" />
+
+    <MudText Typo="Typo.h4" GutterBottom="true">Featured Projects</MudText>
+    <MudGrid Spacing="4">
+        @foreach (var project in featuredProjects)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard>
+                    <MudCardMedia Image="@project.ImageUrl" Height="200" />
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5">@project.Title</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText Typo="Typo.body2">@project.Description</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@project.RepoUrl" Target="_blank">Source Code</MudButton>
+                        <MudButton Variant="Variant.Text" Color="Color.Secondary" Href="@project.LiveUrl" Target="_blank">Live Demo</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+
+    <MudDivider Class="my-8" />
+
+    <MudText Typo="Typo.h4" GutterBottom="true">Skills</MudText>
+    @foreach (var skill in developerProfile.Skills)
+    {
+        <MudChip T="string" Color="Color.Primary">@skill</MudChip>
+    }
+
 </MudContainer>
 
 @code {
-    private string greeting = "Welcome to My Portfolio";
+    private List<Project> featuredProjects = new List<Project>();
 
-    private void ChangeGreeting()
+    protected override void OnInitialized()
     {
-        greeting = "You clicked the button!";
-        StateHasChanged();
+        featuredProjects = projectService.GetProjects().Take(3).ToList();
     }
 }
