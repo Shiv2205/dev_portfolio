@@ -1,8 +1,39 @@
 @page "/about"
+@using blzrTest.Components.Data
+@inject DeveloperProfile profile
 
 <PageTitle>About Me</PageTitle>
 
 <MudContainer>
-    <MudText Typo="Typo.h3" GutterBottom="true">About Me</MudText>
-    <MudText Typo="Typo.body1">This is the about page. I will add more details here later.</MudText>
+    <MudGrid Justify="Justify.Center" Class="mt-8">
+        <MudItem xs="12" sm="4">
+            <MudCard>
+                <MudCardContent>
+                    <MudAvatar Image="@profile.AvatarUrl" Style="height:200px; width:200px; margin-bottom: 20px;" />
+                    <MudText Typo="Typo.h5">@profile.Name</MudText>
+                    <MudText Typo="Typo.subtitle1" Color="Color.Secondary">@profile.Title</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    @foreach (var social in profile.SocialLinks)
+                    {
+                        <MudButton Link="@social.Value" Target="_blank" Variant="Variant.Text" Color="Color.Primary">@social.Key</MudButton>
+                    }
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="8">
+            <MudCard>
+                <MudCardContent>
+                    <MudText Typo="Typo.h6" GutterBottom="true">About Me</MudText>
+                    <MudText Typo="Typo.body1">@profile.Bio</MudText>
+                    <MudDivider Class="my-4" />
+                    <MudText Typo="Typo.h6" GutterBottom="true">Skills</MudText>
+                    @foreach (var skill in profile.Skills)
+                    {
+                        <MudChip T="string" Color="Color.Primary">@skill</MudChip>
+                    }
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
 </MudContainer>
