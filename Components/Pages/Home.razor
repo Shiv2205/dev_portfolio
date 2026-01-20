@@ -17,25 +17,32 @@
 
     <MudText Typo="Typo.h4" GutterBottom="true">Featured Projects</MudText>
     <MudGrid Spacing="4">
-        @foreach (var project in featuredProjects)
+        @if (featuredProjects == null) 
         {
-            <MudItem xs="12" sm="6" md="4">
-                <MudCard>
-                    <MudCardMedia Image="@project.ImageUrl" Height="200" />
-                    <MudCardHeader>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5">@project.Title</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudText Typo="Typo.body2">@project.Description</MudText>
-                    </MudCardContent>
-                    <MudCardActions>
-                        <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@project.RepoUrl" Target="_blank">Source Code</MudButton>
-                        <MudButton Variant="Variant.Text" Color="Color.Secondary" Href="@project.LiveUrl" Target="_blank">Live Demo</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
+            <p>Loading ...</p>
+        }
+        else
+        {
+            @foreach (var project in featuredProjects)
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <MudCard>
+                        <MudCardMedia Image="@project.ImageUrl" Height="200" />
+                        <MudCardHeader>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.h5">@project.Title</MudText>
+                            </CardHeaderContent>
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <MudText Typo="Typo.body2">@project.Description</MudText>
+                        </MudCardContent>
+                        <MudCardActions>
+                            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@project.RepoUrl" Target="_blank">Source Code</MudButton>
+                            <MudButton Variant="Variant.Text" Color="Color.Secondary" Href="@project.LiveUrl" Target="_blank">Live Demo</MudButton>
+                        </MudCardActions>
+                    </MudCard>
+                </MudItem>
+            }
         }
     </MudGrid>
 
@@ -52,8 +59,8 @@
 @code {
     private List<Project> featuredProjects = new List<Project>();
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        featuredProjects = projectService.GetProjects().Take(3).ToList();
+        featuredProjects = (await projectService.GetProjectsAsync()).Take(3).ToList();
     }
 }
