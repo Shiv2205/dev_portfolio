@@ -1,13 +1,38 @@
 @page "/contact"
+@using blzrTest.Components.Data
 
 <PageTitle>Contact Me</PageTitle>
 
 <MudContainer>
     <MudText Typo="Typo.h3" GutterBottom="true">Contact Me</MudText>
-    <MudForm>
-        <MudTextField T="string" Label="Name" Required="true" />
-        <MudTextField T="string" Label="Email" Required="true" InputType="InputType.Email" />
-        <MudTextField T="string" Label="Message" Required="true" Lines="5" />
-        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4">Submit</MudButton>
-    </MudForm>
+    <EditForm Model="@contactMessage" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="contactMessage.Name" For="@(() => contactMessage.Name)" Label="Name" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudTextField @bind-Value="contactMessage.Email" For="@(() => contactMessage.Email)" Label="Email" Variant="Variant.Outlined" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField @bind-Value="contactMessage.Message" For="@(() => contactMessage.Message)" Label="Message" Variant="Variant.Outlined" Lines="5" />
+            </MudItem>
+            <MudItem xs="12">
+                <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="mt-4">Submit</MudButton>
+            </MudItem>
+        </MudGrid>
+    </EditForm>
 </MudContainer>
+
+@code {
+    private ContactMessage contactMessage = new ContactMessage();
+
+    private void HandleValidSubmit()
+    {
+        // This is where you would send the message to the server.
+        // For now, we'll just log it to the console.
+        Console.WriteLine($"Name: {contactMessage.Name}");
+        Console.WriteLine($"Email: {contactMessage.Email}");
+        Console.WriteLine($"Message: {contactMessage.Message}");
+    }
+}
