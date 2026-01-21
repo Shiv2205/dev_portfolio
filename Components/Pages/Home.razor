@@ -2,7 +2,7 @@
 @using dev_portfolio.Components.Data
 @using dev_portfolio.Components.Models
 @inject ProjectService projectService
-@inject DeveloperProfile developerProfile
+@inject DeveloperProfileService profileService
 
 <PageTitle>Home</PageTitle>
 
@@ -50,18 +50,27 @@
     <MudDivider Class="my-8" />
 
     <MudText Typo="Typo.h4" GutterBottom="true">Skills</MudText>
-    @foreach (var skill in developerProfile.Skills)
+    @if (profile is null) 
     {
-        <MudChip T="string" Color="Color.Primary">@skill</MudChip>
+        <p>Loading ...</p>
     }
-
+    else 
+    {
+        @foreach (var skill in profile.Skills)
+        {
+            <MudChip T="string" Color="Color.Primary">@skill</MudChip>
+        }
+    }
 </MudContainer>
 
 @code {
     private List<Project> featuredProjects = new List<Project>();
+    private DeveloperProfile? profile = null;
 
     protected override async Task OnInitializedAsync()
     {
         featuredProjects = (await projectService.GetProjectsAsync()).Take(3).ToList();
+        var profiles = await profileService.GetProfiles();
+        profile = profiles[0];
     }
 }

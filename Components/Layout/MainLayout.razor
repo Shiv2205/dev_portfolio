@@ -1,6 +1,9 @@
 ﻿@inherits LayoutComponentBase
+@using System.Runtime.CompilerServices
+@using SQLitePCL
+@using dev_portfolio.Components.Data
 @using dev_portfolio.Components.Models
-@inject DeveloperProfile developerProfile
+@inject DeveloperProfileService profileService
 
 <MudThemeProvider @bind-IsDarkMode="_isDarkMode" Theme="_myTheme" />
 <MudDialogProvider />
@@ -9,7 +12,7 @@
 <MudLayout>
     <MudAppBar Elevation="1">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
-        <MudText Typo="Typo.h5" Class="ml-3">@developerProfile.Name</MudText>
+        <MudText Typo="Typo.h5" Class="ml-3">@profile?.Name</MudText>
         <MudSpacer />
         <MudIconButton Icon="@(_isDarkMode ? Icons.Material.Filled.WbSunny : Icons.Material.Filled.Brightness4)" Color="Color.Inherit" OnClick="@ToggleDarkMode" />
     </MudAppBar>
@@ -35,6 +38,7 @@
     private bool _drawerOpen = false;
     private bool _isDarkMode = true;
     private CustomTheme _myTheme = new CustomTheme();
+    private DeveloperProfile? profile = null;
 
     private void DrawerToggle()
     {
@@ -44,5 +48,14 @@
     private void ToggleDarkMode()
     {
         _isDarkMode = !_isDarkMode;
+    }
+
+    protected override async Task OnInitializedAsync() 
+    {
+        var profiles = await profileService.GetProfiles();
+        if (profiles is not null) 
+        {
+            profile = profiles[0];
+        }
     }
 }

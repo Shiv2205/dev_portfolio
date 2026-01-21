@@ -8,6 +8,7 @@ public class DevDbContext : DbContext
   public DevDbContext(DbContextOptions<DevDbContext> options) : base(options) { }
 
   public DbSet<Project> Projects { get; set; }
+  public DbSet<DeveloperProfile> Profiles { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
@@ -16,6 +17,11 @@ public class DevDbContext : DbContext
     {
       entity.HasKey(e => e.Id);
       entity.Property(e => e.Title).IsRequired();
+    });
+    modelBuilder.Entity<DeveloperProfile>(entity =>
+    {
+      entity.HasKey(e => e.Name);
+      entity.Ignore(e => e.SocialLinks);
     });
   }
 }

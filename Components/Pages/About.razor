@@ -1,11 +1,18 @@
 @page "/about"
+@using dev_portfolio.Components.Data
 @using dev_portfolio.Components.Models
-@inject DeveloperProfile profile
+@inject DeveloperProfileService profileService
 
 <PageTitle>About Me</PageTitle>
 
 <MudContainer>
     <MudGrid Justify="Justify.Center" Class="mt-8">
+       @if (profile is null) 
+       {
+            <p>Loading ...</p>
+       }
+       else 
+       {
         <MudItem xs="12" sm="4">
             <MudCard>
                 <MudCardContent>
@@ -37,5 +44,18 @@
                 </MudCardContent>
             </MudCard>
         </MudItem>
+       }
     </MudGrid>
 </MudContainer>
+
+@code 
+{
+    private List<DeveloperProfile> profiles = new();
+    private DeveloperProfile? profile = null;
+
+    protected override async Task OnInitializedAsync() 
+    {
+        profiles = await profileService.GetProfiles();
+        profile = profiles[0];
+    }
+}
