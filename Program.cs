@@ -5,6 +5,7 @@ using MudBlazor.Services;
 using dev_portfolio.Components;
 using dev_portfolio.Components.Models;
 using dev_portfolio.Components.Data;
+using Utilities;
 
 const string SEED_DIR = "seed";
 
@@ -19,7 +20,7 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddMudServices();
 builder.Services.AddScoped<ProjectService>();
-builder.Services.AddSingleton<DeveloperProfile>();
+builder.Services.AddScoped<DeveloperProfileService>();
 
 // Build App
 var app = builder.Build();
@@ -30,16 +31,8 @@ using (var scoped = app.Services.CreateScope())
   var context = services.GetRequiredService<DevDbContext>();
   context.Database.EnsureCreated();
 
-  if (!context.Projects.Any())
-  {
-    var jsonText = File.ReadAllText($"{SEED_DIR}/projects.json");
-    var seedData = JsonSerializer.Deserialize<List<Project>>(jsonText);
-    if (seedData is not null)
-    {
-      context.Projects.AddRange(seedData);
-      context.SaveChanges();
-    }
-  }
+  Util.SeedTable(context, context.Projects, $"{SEED_DIR}/projects.json", true);
+  Util.SeedTable(context, context.Profiles, $"{SEED_DIR}/dev_profile.json");
 }
 
 // Configure the HTTP request pipeline.
