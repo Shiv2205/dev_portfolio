@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using dev_portfolio.Components.Models;
 
 namespace dev_portfolio.Components.Data;
 

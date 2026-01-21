@@ -1,3 +1,4 @@
+using dev_portfolio.Components.Models;
 
 namespace dev_portfolio.Components.Data;
 
@@ -10,11 +11,11 @@ public static class DummyProjects
         [
             new Project
             {
-                Title = "Project One",
-                Description = "A web application for tracking personal fitness goals.",
-                Technologies = ["Blazor", "C#", ".NET", "SQL Server"],
+                Title = "RFID Attendance System",
+                Description = "A connected embedded system's project which helps professors track students' attendance more reliably and more efficiently than name-calling.",
+                Technologies = ["C++", "Arduino", "Express.js", "SQL", "Docker", "Google Cloud"],
                 ImageUrl = "https://camo.githubusercontent.com/b47a8b47f34f00357364982d4edfa41f59a3e5a0a75b03265c3303b21af5ed86/68747470733a2f2f696d672e796f75747562652e636f6d2f76692f386471575a63424c7861772f302e6a7067",
-                RepoUrl = "https://github.com/johndoe/project-one",
+                RepoUrl = "https://github.com/Shiv2205/RFID_Attendance_System",
                 LiveUrl = "https://www.youtube.com/watch?v=8dqWZcBLxaw"
             },
             new Project
@@ -22,7 +23,7 @@ public static class DummyProjects
                 Title = "Project Two",
                 Description = "A mobile app for managing recipes and grocery lists.",
                 Technologies = ["MAUI", "C#", ".NET", "SQLite"],
-                ImageUrl = "https://via.placeholder.com/300x200",
+                ImageUrl = "https://placehold.co/300x200",
                 RepoUrl = "https://github.com/johndoe/project-two",
                 LiveUrl = "https://project-two.johndoe.com"
             },
@@ -31,7 +32,7 @@ public static class DummyProjects
                 Title = "Project Three",
                 Description = "An e-commerce website for selling handmade crafts.",
                 Technologies = ["ASP.NET Core MVC", "C#", ".NET", "Stripe"],
-                ImageUrl = "https://via.placeholder.com/300x200",
+                ImageUrl = "https://placehold.co/300x200",
                 RepoUrl = "https://github.com/johndoe/project-three",
                 LiveUrl = "https://project-three.johndoe.com"
             }

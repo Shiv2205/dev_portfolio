@@ -1,12 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using dev_portfolio.Components;
+using dev_portfolio.Components.Models;
 using dev_portfolio.Components.Data;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connection = new SqliteConnection("DataSource=porfolio.db");
+var connection = new SqliteConnection("DataSource=portfolio.db");
 connection.Open();
 
 // Add services to the container.
