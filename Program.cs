@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
+using System.Text.Json;
+using MudBlazor.Services;
 using dev_portfolio.Components;
 using dev_portfolio.Components.Models;
 using dev_portfolio.Components.Data;
-using MudBlazor.Services;
+
+const string SEED_DIR = "seed";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +21,7 @@ builder.Services.AddMudServices();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddSingleton<DeveloperProfile>();
 
+// Build App
 var app = builder.Build();
 
 using (var scoped = app.Services.CreateScope())
@@ -28,8 +32,13 @@ using (var scoped = app.Services.CreateScope())
 
   if (!context.Projects.Any())
   {
-    context.Projects.AddRange(DummyProjects.GetProjects());
-    context.SaveChanges();
+    var jsonText = File.ReadAllText($"{SEED_DIR}/projects.json");
+    var seedData = JsonSerializer.Deserialize<List<Project>>(jsonText);
+    if (seedData is not null)
+    {
+      context.Projects.AddRange(seedData);
+      context.SaveChanges();
+    }
   }
 }
 
@@ -49,7 +58,5 @@ app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 
-app.MapGet("/api/projects", async (DevDbContext db) => 
-    await db.Projects.OrderBy(p => p.Id).ToListAsync());
-
+// Start App
 app.Run();
