@@ -1,15 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace dev_portfolio.Components.Models;
 
 public class DeveloperProfile
 {
-    public string Name { get; set; } = "Shivam Vee";
-    public string Title { get; set; } = "Software Engineer";
-    public string Bio { get; set; } = "I am a passionate software engineer with a love for creating elegant and efficient solutions. I have experience in a variety of technologies, including C#, .NET, Blazor, and Azure.";
-    public List<string> Skills { get; set; } = new List<string> { "C#", ".NET", "Blazor", "Azure", "SQL", "Git" };
-    public string AvatarUrl { get; set; } = "https://avatars.githubusercontent.com/u/92755248?v=4";
-    public Dictionary<string, string> SocialLinks { get; set; } = new Dictionary<string, string>
-    {
-        { "GitHub", "https://github.com/johndoe" },
-        { "LinkedIn", "https://linkedin.com/in/johndoe" }
-    };
+    public string Name { get; set; } = string.Empty;
+    public string? Title { get; set; }
+    public string? Bio { get; set; } 
+    public List<string> Skills { get; set; } = [];
+    public string? AvatarUrl { get; set; } 
+    public Dictionary<string, string> SocialLinks { get; set; } = [];
 }
