@@ -76,6 +76,6 @@ Thumbs.db
 **/*.sass
 
 # User secrets
-appsettings.Development.json
-appsettings.json
-Properties/launchSettings.json
+# appsettings.Development.json
+# appsettings.json
+# Properties/launchSettings.json
