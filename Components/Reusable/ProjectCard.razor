@@ -1,0 +1,41 @@
+@using System.ComponentModel.DataAnnotations
+@using System.ComponentModel
+@using dev_portfolio.Components.Models
+
+@namespace dev_portfolio.Components.Reusable
+
+<MudItem xs="12" sm="6" md="4">
+  <MudCard>
+    <MudCardMedia Image="@ProjectData.ImageUrl" Height="200" />
+    <MudCardHeader>
+      <MudText Typo="Typo.h5">@ProjectData.Title</MudText>
+    </MudCardHeader>
+    <MudCardContent>
+      <MudText Typo="Typo.body2">@ProjectData.Description</MudText>
+      <div class="mt-2">
+        @if (!Featured && ProjectData.Technologies is not null)
+        {
+          @foreach (var tech in ProjectData.Technologies)
+          {
+            <MudChip T="string" Size="Size.Small" Color="Color.Primary">@tech</MudChip>
+          }
+        }
+      </div>
+    </MudCardContent>
+    <MudCardActions>
+      <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@ProjectData.RepoUrl" Target="_blank">Source Code
+      </MudButton>
+      <MudButton Variant="Variant.Text" Color="Color.Secondary" Href="@ProjectData.LiveUrl" Target="_blank">Live Demo
+      </MudButton>
+    </MudCardActions>
+  </MudCard>
+</MudItem>
+
+@code
+{
+  [Parameter, EditorRequired]
+  public Project ProjectData { get; set; }
+
+  [Parameter]
+  public bool Featured { get; set; } = false;
+}
