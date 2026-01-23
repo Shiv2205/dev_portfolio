@@ -9,4 +9,5 @@ public class Project
     public string? ImageUrl { get; set; }
     public string? RepoUrl { get; set; }
     public string? LiveUrl { get; set; }
+    public string? DemoUrl { get; set; }
 }

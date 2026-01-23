@@ -23,19 +23,41 @@
       </div>
     </MudCardContent>
     <MudCardActions>
-      <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@ProjectData.RepoUrl" Target="_blank">Source Code
-      </MudButton>
-      <MudButton Variant="Variant.Text" Color="Color.Secondary" Href="@ProjectData.LiveUrl" Target="_blank">Live Demo
-      </MudButton>
+      <MudButtonGroup Color="Color.Primary" Variant="Variant.Outlined">
+        <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Href="@ProjectData.RepoUrl" Target="_blank"
+          Color="Color.Primary" Disabled="@ButtonStates[0]" aria-label="github" />
+        <MudIconButton Icon="@Icons.Material.Filled.Language" Href="@ProjectData.LiveUrl" Target="_blank"
+          Color="Color.Warning" Disabled="@ButtonStates[1]" aria-label="Live Demo" />
+        <MudIconButton Icon="@Icons.Custom.Brands.YouTube" Href="@ProjectData.DemoUrl" Target="_blank"
+          Color="Color.Error" Disabled="@ButtonStates[2]" aria-label="Video Demo" />
+      </MudButtonGroup>
     </MudCardActions>
   </MudCard>
 </MudItem>
 
 @code
 {
-  [Parameter, EditorRequired]
-  public Project ProjectData { get; set; }
+    [Parameter, EditorRequired]
+    public Project ProjectData { get; set; }
 
-  [Parameter]
-  public bool Featured { get; set; } = false;
+    [Parameter]
+    public bool Featured { get; set; } = false;
+
+    public bool[] ButtonStates { get; set; } = [false, false, false];
+
+    public void ValidateButtonStates()
+    {
+        if (ProjectData.RepoUrl is null)
+            ButtonStates[0] = true;
+        if (ProjectData.LiveUrl is null)
+            ButtonStates[1] = true;
+        if (ProjectData.DemoUrl is null)
+            ButtonStates[2] = true;
+    }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        ValidateButtonStates();
+    }
 }
