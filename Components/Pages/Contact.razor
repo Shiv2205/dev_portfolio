@@ -1,5 +1,8 @@
 @page "/contact"
+@using dev_portfolio.Components.Data
 @using dev_portfolio.Components.Models
+
+@inject IEmailService emailService
 
 <PageTitle>Contact Me</PageTitle>
 
@@ -26,6 +29,12 @@
 
 @code {
     private ContactMessage contactMessage = new ContactMessage();
+    private EmailData emailData = new()
+    {
+        RecipientId = "shivamveerabudren@gmail.com",
+        RecipientName = "Shivam",
+        Subject = "Contact"
+    };
 
     private void HandleValidSubmit()
     {
@@ -34,5 +43,10 @@
         Console.WriteLine($"Name: {contactMessage.Name}");
         Console.WriteLine($"Email: {contactMessage.Email}");
         Console.WriteLine($"Message: {contactMessage.Message}");
+
+        emailData.Body = @$"{contactMessage.Name} | {contactMessage.Email}
+                            {contactMessage.Message}";
+
+        emailService.SendEmail(emailData);
     }
 }

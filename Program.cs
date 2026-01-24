@@ -3,6 +3,7 @@ using Microsoft.Data.Sqlite;
 using MudBlazor.Services;
 using dev_portfolio.Components;
 using dev_portfolio.Components.Data;
+using dev_portfolio.Components.Models;
 using Utilities;
 
 const string SEED_DIR = "seed";
@@ -12,13 +13,19 @@ var builder = WebApplication.CreateBuilder(args);
 var connection = new SqliteConnection(builder.Configuration["Database:Source"]);
 connection.Open();
 
+
 // Add services to the container.
-builder.Services.AddDbContext<DevDbContext>(options => options.UseSqlite(connection));
+builder.Services.AddDbContext<DevDbContext>(
+    options => options.UseSqlite(connection));                                 // SQLite connection
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 builder.Services.AddMudServices();
 builder.Services.AddScoped<ProjectService>();
 builder.Services.AddScoped<DeveloperProfileService>();
+builder.Services.Configure<SmtpSettings>(
+    builder.Configuration.GetSection("SmtpSettings"));                         // SMTP Settings
+builder.Services.AddTransient<IEmailService, EmailService>();                  // Email Service
+
 
 // Build App
 var app = builder.Build();
