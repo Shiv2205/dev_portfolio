@@ -9,4 +9,7 @@ public class DeveloperProfileService(DevDbContext db)
 
   public async Task<List<DeveloperProfile>> GetProfiles() =>
     await _db.Profiles.ToListAsync();
+
+  public async Task<DeveloperProfile> GetProfile(string name) =>
+    await _db.Profiles.FirstAsync(e => e.Name == name);
 }
