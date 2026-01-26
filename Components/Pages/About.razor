@@ -1,6 +1,8 @@
 @page "/about"
 @using dev_portfolio.Components.Data
 @using dev_portfolio.Components.Models
+
+@inject IConfiguration config
 @inject DeveloperProfileService profileService
 
 <PageTitle>About Me</PageTitle>
@@ -49,13 +51,15 @@
 </MudContainer>
 
 @code 
-{
-    private List<DeveloperProfile> profiles = new();
+{ 
+    private IConfiguration? _config;
     private DeveloperProfile? profile = null;
 
     protected override async Task OnInitializedAsync() 
-    {
-        profiles = await profileService.GetProfiles();
-        profile = profiles[0];
+    { 
+        _config = config;
+        var profileOwner = _config["Profile:Owner"];
+        if (profileOwner is not null)
+            profile = await profileService.GetProfile(profileOwner);
     }
 }

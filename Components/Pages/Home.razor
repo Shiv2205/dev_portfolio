@@ -3,6 +3,7 @@
 @using dev_portfolio.Components.Models
 @using dev_portfolio.Components.Reusable
 
+@inject IConfiguration config
 @inject ProjectService projectService
 @inject DeveloperProfileService profileService
 
@@ -51,13 +52,17 @@
 </MudContainer>
 
 @code {
+    private IConfiguration? _config;
     private List<Project> featuredProjects = new List<Project>();
     private DeveloperProfile? profile = null;
 
     protected override async Task OnInitializedAsync()
     {
-        featuredProjects = (await projectService.GetProjectsAsync()).Take(3).ToList();
-        var profiles = await profileService.GetProfiles();
-        profile = profiles[0];
+        _config = config;
+        featuredProjects = (await projectService.GetProjectsAsync()).Take(3).ToList(); 
+
+        var profileOwner = _config["Profile:Owner"];
+        if (profileOwner is not null)
+            profile = await profileService.GetProfile(profileOwner);
     }
 }
