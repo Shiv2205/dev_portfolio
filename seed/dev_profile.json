@@ -1,18 +1,21 @@
 {
   "Name": "Shivam Veerabudren",
   "Title": "Software Engineer",
-  "Bio": "I am a passionate software engineer with a love for creating elegant and efficient solutions. I have experience in a variety of technologies, including C#, .NET, Blazor, and Azure.",
+  "Bio": "Ever since I built my first embedded system project, I've been fascinated by how hardware and software can come together to solve real-world problems. I enjoy turning complex technical challenges into efficient and maintainable solutions. I believe in efficient problem-solving, structured and easily readable code, and continuous learning. My work is driven by curiosity, whether it's learning about new tools and techniques, or improving my skills.",
   "Skills": [
     "C#",
     ".NET",
     "Blazor",
     "Azure",
+    "Express.js",
+    "React",
+    "Docker",
     "SQL",
     "Git"
   ],
   "AvatarUrl": "https://avatars.githubusercontent.com/u/92755248?v=4",
   "SocialLinks": {
-    "GitHub": "https://github.com/johndoe",
-    "LinkedIn": "https://linkedin.com/in/johndoe"
+    "GitHub": "https://github.com/Shiv2205",
+    "LinkedIn": "https://www.linkedin.com/in/shivam-veerabudren-15321116a"
   }
 }
